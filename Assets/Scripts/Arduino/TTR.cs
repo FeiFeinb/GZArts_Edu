@@ -77,7 +77,7 @@ public class TTR : MonoBehaviour
 
         if (animator == null)
         {
-            Debug.Log("animator为空，需要添加");
+            Debug.LogWarning("animator为空，需要添加");
             return;
         }
 
