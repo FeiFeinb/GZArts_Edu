@@ -1,31 +1,35 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System.IO.Ports;
 using System.Threading;
 
 public class TTR : MonoBehaviour
 {
-    private SerialPort port = null;
-    private Thread thread;
-    private bool isConnected;
-    private bool select;
-    private string Com;
+    private static TTR instance = null;
 
-    [Header("´®¿Ú")]
+    public static TTR Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    [Header("ä¸²å£")]
+    public bool isConnected;
     public string[] Text;
     public string digital, analog;
     public string[] ports;
     public Dropdown dropdown;
+    private SerialPort port = null;
+    private Thread thread;
+    private bool select;
+    private string Com;
 
-    [Header("¶¯»­Ïà¹Ø")]
-    public int state_0;
-    public int state_1, state_2;
-    public Animator animator;
-    public int RandomPlay;
-    public bool isOriginalState, StatePlay;
-    private AnimatorStateInfo stateInfo;
-    public bool Initial, state, blossom, fuulblossom;
-    public float InvertedSpeed;
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -38,11 +42,10 @@ public class TTR : MonoBehaviour
     {
         DropDownControl();
         DropDownActive();
-        AnimControl();
         Function();
     }
 
-    //»ù±¾¹¦ÄÜ
+    //åŸºæœ¬åŠŸèƒ½
     private void Function()
     {
         ports = GetPorts();
@@ -52,27 +55,9 @@ public class TTR : MonoBehaviour
             ReConnectCom();
             return;
         }
-
-        if (animator == null)
-        {
-            Debug.LogWarning("animatorÎª¿Õ£¬ĞèÒªÌí¼Ó");
-            return;
-        }
-
-        if (analog != "0")
-        {
-
-            animator.SetFloat("Inverted", InvertedSpeed);
-
-        }
-        else
-        {
-            animator.SetFloat("Inverted", 1);
-        }
-
     }
 
-    //´®¿ÚÖØÁ¬
+    //ä¸²å£é‡è¿
     private void ReConnectCom()
     {
         if (!select)
@@ -86,7 +71,7 @@ public class TTR : MonoBehaviour
             }
             else
             {
-                //4¸ö³õÊ¼´®¿Ú¾ùÎª¹Ø±Õ
+                //4ä¸ªåˆå§‹ä¸²å£å‡ä¸ºå…³é—­
                 port.Open();
                 Debug.Log("Connect" + dropdown.captionText.text);
                 isConnected = true;
@@ -99,14 +84,14 @@ public class TTR : MonoBehaviour
         }
     }
 
-    //ÏÔÊ¾´®¿Ú
+    //æ˜¾ç¤ºä¸²å£
     private string[] GetPorts()
     {
         string[] portnames = SerialPort.GetPortNames();
         return portnames;
     }
 
-    //Áí¿ªÏß³Ì´«µİÏûÏ¢
+    //å¦å¼€çº¿ç¨‹ä¼ é€’æ¶ˆæ¯
     private void MessageThread()
     {
         while (true)
@@ -125,12 +110,12 @@ public class TTR : MonoBehaviour
         }
     }
 
-    // ´®¿ÚÑ¡Ôñ
+    // ä¸²å£é€‰æ‹©
     private void DropDownControl()
     {
         if (dropdown == null)
         {
-            Debug.LogWarning("ĞèÒªÌí¼ÓUI/DROPDOWN×é¼ş");
+            Debug.LogWarning("éœ€è¦æ·»åŠ UI/DROPDOWNç»„ä»¶");
             return;
         }
 
@@ -140,14 +125,14 @@ public class TTR : MonoBehaviour
         dropdown.options.Add(temoData);
         for (int i = 0; i < ports.Length; i++)
         {
-            //¸øÃ¿Ò»¸öoptionÑ¡Ïî¸³Öµ
+            //ç»™æ¯ä¸€ä¸ªoptioné€‰é¡¹èµ‹å€¼
             temoData = new Dropdown.OptionData();
             temoData.text = ports[i];
             dropdown.options.Add(temoData);
         }
     }
 
-    //´®¿Ú¸Ä±ä²¢Ìí¼Ó´®¿Ú
+    //ä¸²å£æ”¹å˜å¹¶æ·»åŠ ä¸²å£
     private void DropDownChange(int value)
     {
         select = value == 0 ? false : true;
@@ -167,6 +152,7 @@ public class TTR : MonoBehaviour
         }
     }
 
+    //dropdownæ˜¾ç¤º
     private void DropDownActive()
     {
         if (dropdown.gameObject.activeSelf == false)
@@ -177,41 +163,7 @@ public class TTR : MonoBehaviour
         }
     }
 
-    //¶¯»­ÇĞ»»
-    private void AnimControl()
-    {
-        if (animator == null)
-            return;
-
-        stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
-        //»ñÈ¡µ±Ç°¶¯»­Ãû³Æ
-        if (stateInfo.IsName("State"))
-        {
-            isOriginalState = true;
-        }
-
-        //ÅĞ¶Ï¶¯»­²¥·Å
-        if (StatePlay && digital.Equals("1"))
-        {
-            RandomPlay = Random.Range(1, 5);
-            if (isOriginalState)
-            {
-                animator.SetInteger("State", RandomPlay);
-                isOriginalState = false;
-            }
-            StatePlay = false;
-        }
-        else if (digital.Equals("0"))
-        {
-            animator.SetInteger("State", 0);
-        }
-
-        //¶¯»­¿É²¥·Å½ø³Ì
-
-    }
-
-    //¹Ø±Õ´®¿Ú¡¢Ïß³Ì
+    //å…³é—­ä¸²å£ã€çº¿ç¨‹
     private void OnApplicationQuit()
     {
         thread.Abort();
