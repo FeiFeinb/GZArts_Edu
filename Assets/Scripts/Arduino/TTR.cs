@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO.Ports;
@@ -26,49 +23,30 @@ public class TTR : MonoBehaviour
     public Animator animator;
     public int RandomPlay;
     public bool isOriginalState, StatePlay;
-    //private AnimatorClipInfo clipInfo;
     private AnimatorStateInfo stateInfo;
     public bool Initial, state, blossom, fuulblossom;
     public float InvertedSpeed;
 
-    //测试多字节传输
-    [HideInInspector]
-    public byte[] receive = new byte[16];
-
     private void Start()
     {
-        //stateInfo = GetComponent<AnimatorStateInfo>();
-        ports = GetPorts();
+        dropdown.onValueChanged.AddListener(DropDownChange);
         thread = new Thread(MessageThread);
-        //port = new SerialPort(Com,9600);
-        //port.Open();
         thread.Start();
-
-        //StartCoroutine("enumerator");
     }
-
-    #region //测试串口传输
-    //IEnumerator enumerator()
-    //{
-    //    while (true)
-    //    {
-    //        Text = port.ReadLine();
-    //        port.DiscardInBuffer();
-    //        yield return new WaitForSeconds(0.3f);
-    //    }
-    //}
-    #endregion
 
     private void FixedUpdate()
     {
         DropDownControl();
-        Function();
+        DropDownActive();
         AnimControl();
+        Function();
     }
 
     //基本功能
     private void Function()
     {
+        ports = GetPorts();
+
         if (!isConnected)
         {
             ReConnectCom();
@@ -81,24 +59,17 @@ public class TTR : MonoBehaviour
             return;
         }
 
-        if (port.PortName != ports[ports.Length - 1])
+        if (analog != "0")
         {
-            isConnected = false;
-            return;
+
+            animator.SetFloat("Inverted", InvertedSpeed);
+
         }
         else
         {
-            if (analog != "0")
-            {
-
-                animator.SetFloat("Inverted", InvertedSpeed);
-
-            }
-            else
-            {
-                animator.SetFloat("Inverted", 1);
-            }
+            animator.SetFloat("Inverted", 1);
         }
+
     }
 
     //串口重连
@@ -107,10 +78,6 @@ public class TTR : MonoBehaviour
         if (!select)
             return;
 
-        if (port.PortName != ports[ports.Length - 1])
-        {
-            return;
-        }
         try
         {
             if (port.IsOpen)
@@ -121,14 +88,14 @@ public class TTR : MonoBehaviour
             {
                 //4个初始串口均为关闭
                 port.Open();
-                Debug.Log("Connect" + ports[ports.Length - 1]);
+                Debug.Log("Connect" + dropdown.captionText.text);
                 isConnected = true;
             }
 
         }
         catch
         {
-            Debug.LogError("CantConnectCom2");
+            Debug.LogError("CantConnectCom");
         }
     }
 
@@ -144,23 +111,20 @@ public class TTR : MonoBehaviour
     {
         while (true)
         {
-            ports = GetPorts();
             if (isConnected)
                 try
                 {
                     Text = port.ReadLine().Split(',');
                     digital = Text[0];
                     analog = Text[1];
-
                 }
                 catch
                 {
-
                 }
 
         }
     }
-   
+
     // 串口选择
     private void DropDownControl()
     {
@@ -170,39 +134,46 @@ public class TTR : MonoBehaviour
             return;
         }
 
-        if (isConnected)
-        {
-            if (dropdown.gameObject.activeSelf == true)
-                dropdown.gameObject.SetActive(false);
-            return;
-        }
-
         dropdown.options.Clear();
         Dropdown.OptionData temoData;
         temoData = new Dropdown.OptionData();
         dropdown.options.Add(temoData);
-        for (int i = 1; i < ports.Length + 1; i++)
+        for (int i = 0; i < ports.Length; i++)
         {
             //给每一个option选项赋值
             temoData = new Dropdown.OptionData();
-            temoData.text = ports[i - 1];
+            temoData.text = ports[i];
             dropdown.options.Add(temoData);
-        }
-
-        if(dropdown.value != 0)
-        {
-            Com = dropdown.captionText.text;
-            Addport();   
         }
     }
 
-    //添加串口
-    private void Addport()
+    //串口改变并添加串口
+    private void DropDownChange(int value)
     {
-        if (!select)
+        select = value == 0 ? false : true;
+
+        if (port != null)
         {
+            port.Close();
+            port = null;
+        }
+
+        if (select)
+        {
+            Com = dropdown.captionText.text;
             port = new SerialPort(Com, 9600);
-            select = true;
+            isConnected = false;
+            dropdown.gameObject.SetActive(false);
+        }
+    }
+
+    private void DropDownActive()
+    {
+        if (dropdown.gameObject.activeSelf == false)
+        {
+            if (Input.GetKey(KeyCode.LeftAlt))
+                if (Input.GetKeyDown(KeyCode.Z))
+                    dropdown.gameObject.SetActive(true);
         }
     }
 
@@ -215,13 +186,13 @@ public class TTR : MonoBehaviour
         stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         //获取当前动画名称
-        if(stateInfo.IsName("State"))
+        if (stateInfo.IsName("State"))
         {
             isOriginalState = true;
         }
 
         //判断动画播放
-        if(StatePlay && digital.Equals("1"))
+        if (StatePlay && digital.Equals("1"))
         {
             RandomPlay = Random.Range(1, 5);
             if (isOriginalState)
@@ -231,20 +202,20 @@ public class TTR : MonoBehaviour
             }
             StatePlay = false;
         }
-        else if(digital.Equals("0"))
+        else if (digital.Equals("0"))
         {
             animator.SetInteger("State", 0);
         }
-        
+
         //动画可播放进程
 
     }
 
-    //关闭串口。线程
+    //关闭串口、线程
     private void OnApplicationQuit()
     {
         thread.Abort();
-        if(isConnected)
-        port.Close();
+        if (isConnected)
+            port.Close();
     }
 }
