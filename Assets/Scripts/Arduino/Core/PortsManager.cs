@@ -20,7 +20,7 @@ public class PortsManager : BaseSingletonWithMono<PortsManager>
             for (int i = 0; i < tempPortsName.Length; i++)
             {
                 if (tempPortsName[i] == _portsName[i])
-                    return;
+                    continue;
             }
         }
         _portsName = tempPortsName.ToList();
