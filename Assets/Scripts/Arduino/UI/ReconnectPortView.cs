@@ -8,14 +8,13 @@ public class ReconnectPortView : BaseUIView, IInit
 {
     public static ReconnectPortView controller;
     
-    [SerializeField] private Button _cancleButton;      // 取消按钮
     [SerializeField] private Text reconnectText;        // 重新连接文字UI
     
     private Coroutine currentCoroutine;                 // 重新连接协程
     
     public void Init()
     {
-        _cancleButton.onClick.AddListener(CancleReconnect);
+        
     }
     
     /// <summary>
@@ -33,21 +32,6 @@ public class ReconnectPortView : BaseUIView, IInit
         currentCoroutine = StartCoroutine(TryReconnectLoop());
     }
     
-    /// <summary>
-    /// 手动取消重连
-    /// </summary>
-    private void CancleReconnect()
-    {
-        // 关闭协程
-        if (currentCoroutine != null)
-        {
-            StopCoroutine(TryReconnectLoop());
-        } 
-        // 关闭UI界面
-        Hide();
-    }
-
-
     private IEnumerator TryReconnectLoop()
     {
         void SetTextAnimation()

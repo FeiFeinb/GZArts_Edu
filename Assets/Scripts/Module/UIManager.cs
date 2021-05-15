@@ -13,6 +13,6 @@ public class UIManager : MonoBehaviour
         PortsSelectorView.controller = _portsSelectorView.GetComponent<PortsSelectorView>();
         PortsSelectorView.controller.Init();
         ReconnectPortView.controller = _reconnectPortView.GetComponent<ReconnectPortView>();
-        PortsSelectorView.controller.Init();
+        ReconnectPortView.controller.Init();
     }
 }

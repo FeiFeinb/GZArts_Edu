@@ -27,7 +27,11 @@ public class PortsSelectorView : BaseUIView, IInit
 #endif
         Application.Quit();
     }
-    
+
+    public void ResetDropDown()
+    {
+        _selector.value = 0;
+    }
     /// <summary>
     /// 选择DropDownUI回调
     /// </summary>
