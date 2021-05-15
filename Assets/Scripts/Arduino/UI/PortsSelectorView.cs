@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-public class PortsSelectorView : BaseUIView, IInit
+public class PortsSelectorView : BaseUIView, IPreInit
 {
     public static PortsSelectorView controller;
     
     [SerializeField] private Dropdown _selector;        // 串口选择UI
     [SerializeField] private Button _quitButton;        // 退出按钮
     
-    public void Init()
+    public void PreInit()
     {
         // 添加选择监听
         _selector.onValueChanged.AddListener(OnSelectPort);

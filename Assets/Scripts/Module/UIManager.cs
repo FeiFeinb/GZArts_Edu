@@ -11,8 +11,8 @@ public class UIManager : MonoBehaviour
     {
         // UI初始化
         PortsSelectorView.controller = _portsSelectorView.GetComponent<PortsSelectorView>();
-        PortsSelectorView.controller.Init();
+        PortsSelectorView.controller.PreInit();
         ReconnectPortView.controller = _reconnectPortView.GetComponent<ReconnectPortView>();
-        ReconnectPortView.controller.Init();
+        ReconnectPortView.controller.PreInit();
     }
 }

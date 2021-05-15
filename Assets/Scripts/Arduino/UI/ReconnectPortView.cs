@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-public class ReconnectPortView : BaseUIView, IInit
+public class ReconnectPortView : BaseUIView, IPreInit
 {
     public static ReconnectPortView controller;
     
@@ -12,11 +12,8 @@ public class ReconnectPortView : BaseUIView, IInit
     
     private Coroutine currentCoroutine;                 // 重新连接协程
     
-    public void Init()
-    {
-        
-    }
-    
+    public void PreInit() {}
+
     /// <summary>
     /// 开始重连
     /// </summary>

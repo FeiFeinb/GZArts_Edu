@@ -11,9 +11,8 @@ using UnityEngine.PlayerLoop;
 
 public class PortConnectController : BaseSingletonWithMono<PortConnectController>
 {
-    public float GAMETIME;
     public string StashConnectPortName => _stashConnectPortName;
-    public string DigitalSingnal => _digitalSignal;
+    public bool DigitalSingnal => _digitalSignal == "1" ? true : false;
     public string AnalogSignal => _analogSignal;
     public bool IsConnected => isConnected;
 
@@ -28,7 +27,7 @@ public class PortConnectController : BaseSingletonWithMono<PortConnectController
     
     private bool isConnected;               // 是否已连接单片机
     private bool isInitiativeDisConnect;    // 是否主动断开连接
-    private string _stashConnectPortName;        // 所连接的串口名字
+    private string _stashConnectPortName;   // 所连接的串口名字
     private string _analogSignal;           // 串口输出模拟信号
     private string _digitalSignal;          // 串口输出数字信号
     
@@ -53,8 +52,6 @@ public class PortConnectController : BaseSingletonWithMono<PortConnectController
             ReconnectPortView.controller.Reconnect();
             _reconnectedTrigger = false;
         }
-        // 并没有什么卵用 单纯是为了强制刷新Inspector面板使自定义编辑器能及时更新
-        GAMETIME = Time.time;
     }
 
     private void OnApplicationQuit()
