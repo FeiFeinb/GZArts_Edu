@@ -68,7 +68,8 @@ public class Anime : MonoBehaviour
     private void TestAnime()
     {
         //框架可行，bool换成integer
-        if (digital.Equals(1))
+        Debug.Log(digital);
+        if (digital.Equals("1"))
         {
             animator.SetBool("Start", true);
             if (stateInfo.IsName("AnimationOne"))
@@ -80,7 +81,7 @@ public class Anime : MonoBehaviour
                 }
             }
         }
-        else if (digital.Equals(0))
+        else if (digital.Equals("0"))
         {
             animator.SetBool("Over", false);
             animator.SetFloat("Inverted", InvertedSpeed);
@@ -131,7 +132,7 @@ public class Anime : MonoBehaviour
     //动画各参数的判断
     private void AnimeControl()
     {
-        if (digital.Equals(0))
+        if (digital.Equals("0"))
         {
             animator.SetFloat("Inverted", 1);
             //需要过渡动画？
@@ -152,7 +153,7 @@ public class Anime : MonoBehaviour
 
         //判断动画播放
         //判断过慢
-        if (isOriginalState && digital.Equals(1))
+        if (isOriginalState && digital.Equals("1"))
         {
             //判断该播放的动画
             //换成函数

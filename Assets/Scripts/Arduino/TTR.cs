@@ -158,7 +158,7 @@ public class TTR : MonoBehaviour
         if (dropdown.gameObject.activeSelf == false)
         {
             if (Input.GetKey(KeyCode.LeftAlt))
-                if (Input.GetKeyDown(KeyCode.Z))
+                if (Input.GetKeyDown(KeyCode.Q))
                     dropdown.gameObject.SetActive(true);
         }
     }
