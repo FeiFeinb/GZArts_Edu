@@ -15,7 +15,7 @@ public class PortConnectControllerEditor : Editor
     {
         base.OnInspectorGUI();
         // 显示串口输出
-        EditorGUILayout.LabelField("数字信号：", _controller.DigitalSingnal ? "触发" : "不触发");
+        EditorGUILayout.LabelField("数字信号：", _controller.DigitalSignal ? "触发" : "不触发");
         EditorGUILayout.LabelField("模拟信号：", string.IsNullOrEmpty(_controller.AnalogSignal) ? "无" : _controller.AnalogSignal);
         // 显示串口状态
         EditorGUILayout.LabelField("当前串口名称: ", string.IsNullOrEmpty(_controller.StashConnectPortName) ? "空" : _controller.StashConnectPortName);

@@ -12,7 +12,8 @@ using UnityEngine.PlayerLoop;
 public class PortConnectController : BaseSingletonWithMono<PortConnectController>
 {
     public string StashConnectPortName => _stashConnectPortName;
-    public bool DigitalSingnal => _digitalSignal == "1" ? true : false;
+    public bool DigitalSignal => _digitalSignal == "1" ? true : false;
+    public string DigitalSignalStr => _digitalSignal;
     public string AnalogSignal => _analogSignal;
     public bool IsConnected => isConnected;
 

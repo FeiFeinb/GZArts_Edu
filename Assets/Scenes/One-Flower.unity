@@ -174,7 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2e48a1b438e2a4b9d0af857ef78f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 196357122}
+  forwardSpeed: 1
+  reverseSpeed: -1
 --- !u!114 &196357121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,6 +598,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ReconnectPortView
       objectReference: {fileID: 0}
+    - target: {fileID: 5548532646292774319, guid: 0c8ee153dc5ce6a4fb982f3076bf75a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c8ee153dc5ce6a4fb982f3076bf75a9, type: 3}
 --- !u!1 &1300478751
@@ -765,9 +770,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1127149436}
     m_Modifications:
+    - target: {fileID: 895437882800427211, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 895437882800427211, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 895437882800427211, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 895437882800427211, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -77.08055
+      objectReference: {fileID: 0}
     - target: {fileID: 895437884086939502, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}
       propertyPath: m_Name
       value: PortSelectView
+      objectReference: {fileID: 0}
+    - target: {fileID: 895437884086939502, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 895437884086939503, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}
       propertyPath: m_Pivot.x
@@ -852,6 +877,22 @@ PrefabInstance:
     - target: {fileID: 895437884086939503, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6319573994335776478, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6319573994335776478, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6319573994335776478, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 525
+      objectReference: {fileID: 0}
+    - target: {fileID: 6319573994335776478, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -77.08055
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fae4d412d135db46be88d3f5c21e5a6, type: 3}

@@ -10,12 +10,14 @@ public class PortsSelectorView : BaseUIView, IPreInit
     
     [SerializeField] private Dropdown _selector;        // 串口选择UI
     [SerializeField] private Button _quitButton;        // 退出按钮
-    
+    [SerializeField] private Button _hideButton;        // 关闭UI按钮
+    [SerializeField] private Text _stateText;
     public void PreInit()
     {
         // 添加选择监听
         _selector.onValueChanged.AddListener(OnSelectPort);
         _quitButton.onClick.AddListener(Quit);
+        _hideButton.onClick.AddListener(Hide);
         // 添加刷新DropDownUI监听
         PortsManager.Instance.onPortsChange += GenerateDropDown;
     }
@@ -28,10 +30,25 @@ public class PortsSelectorView : BaseUIView, IPreInit
         Application.Quit();
     }
 
-    public void ResetDropDown()
+    private void Update()
     {
-        _selector.value = 0;
+        if (_selector.value == 0)
+        {
+            _stateText.text = "未选择";
+            return;
+        }
+        var portController = PortConnectController.Instance;
+        bool isOutPut = portController.DigitalSignalStr == "0" || portController.DigitalSignalStr == "1";
+        if (PortConnectController.Instance.IsConnected && isOutPut)
+        {
+            _stateText.text = "<color=green>已连接</color>";
+        }
+        else
+        {
+            _stateText.text = "正在检测\n当前未连接";
+        }
     }
+
     /// <summary>
     /// 选择DropDownUI回调
     /// </summary>

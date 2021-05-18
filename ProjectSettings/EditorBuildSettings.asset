@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/One-Flower.unity
+    guid: 4bbbd8248164acc44976891c9854c2dc
   m_configObjects: {}
