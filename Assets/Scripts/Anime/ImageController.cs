@@ -17,24 +17,16 @@ public class ImageController : MonoBehaviour
 
     private void Update()
     {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        //框架可行，bool换成integer
         if (PortConnectController.Instance.DigitalSignal)
         {
             animator.SetBool("Start", true);
-            animator.SetFloat("PlayerSpeed", forwardSpeed);
-            if (stateInfo.IsName("Flower") && stateInfo.normalizedTime >= 1)
-            {
-                // 播放完毕
-            }
+            animator.SetFloat("PlaySpeed", forwardSpeed);
         }
         else
         {
-            animator.SetFloat("PlayerSpeed", reverseSpeed);
-            if (stateInfo.normalizedTime <= 0 && stateInfo.IsName("Flower"))
-            {
-                animator.SetBool("Start", false);
-            }
+            animator.SetFloat("PlaySpeed", reverseSpeed);
+            animator.SetBool("Start", false);
         }
+        animator.SetBool("Sit", PortConnectController.Instance.DigitalSignal);
     }
 }
