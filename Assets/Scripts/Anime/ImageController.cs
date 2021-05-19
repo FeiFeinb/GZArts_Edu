@@ -2,16 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator), typeof(AnimationControllerManeger))]
 public class ImageController : MonoBehaviour
 {
     [SerializeField, Tooltip("正向播放速度")] private float forwardSpeed = 1;
     [SerializeField, Tooltip("反向播放速度")] private float reverseSpeed = -1;
-    [SerializeField, Tooltip("动画是否延迟")] private bool WhetherDelay = false;//逻辑反了。。。
+    [SerializeField, Tooltip("动画是否延迟")] private bool WhetherDelay = false;
     [SerializeField,Tooltip("延迟时间")] private float Delaytime;
 
     private Animator animator;
     private AnimatorStateInfo stateInfo;
+
 
     private float t = 0;
 
@@ -51,6 +52,10 @@ public class ImageController : MonoBehaviour
                 t = 0;
                 WhetherDelay = false;
             }
+        }
+        else if(!PortConnectController.Instance.DigitalSignal)
+        {
+            WhetherDelay = false;
         }
     }
 
