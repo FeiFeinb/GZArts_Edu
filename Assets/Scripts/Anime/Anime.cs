@@ -103,16 +103,6 @@ public class Anime : MonoBehaviour
 
         if (resetList)
         {
-            //在没有数组值的情况下，强行洗牌，内存消耗极大
-            //for(int i = 0; i < int num; i++)
-            //{
-            //    int seed = Random.Range(1, 5);
-            //    while(!AnimeList.Contains(seed))
-            //    {
-            //        AnimeList.Add(seed);
-            //    }
-            //}
-
             //10次循环，降低重复率
             for (int i = 0; i < 10; i++)
             {
