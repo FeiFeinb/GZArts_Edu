@@ -38,7 +38,7 @@ public class PortsSelectorView : BaseUIView, IPreInit
             return;
         }
         var portController = PortConnectController.Instance;
-        bool isOutPut = portController.DigitalSignalStr == "0" || portController.DigitalSignalStr == "1";
+        bool isOutPut = portController.DigitalSignalOneStr == "0" || portController.DigitalSignalOneStr == "1";
         if (PortConnectController.Instance.IsConnected && isOutPut)
         {
             _stateText.text = "<color=green>已连接</color>";

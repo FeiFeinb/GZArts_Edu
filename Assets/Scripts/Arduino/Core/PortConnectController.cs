@@ -12,10 +12,13 @@ using UnityEngine.PlayerLoop;
 public class PortConnectController : BaseSingletonWithMono<PortConnectController>
 {
     public string StashConnectPortName => _stashConnectPortName;
-    public bool DigitalSignal => _digitalSignal == "1" ? true : false;
-    public string DigitalSignalStr => _digitalSignal;
-    public string AnalogSignal => _analogSignal;
-    public bool IsConnected => isConnected;
+    public bool DigitalSignalOne => _digitalSignalOne == "1" ? true : false;
+    public bool DigitalSignalTwo => _digitalSignalTwo == "1" ? true : false;
+    public bool DigitalSignalThree => _digitalSignalThree == "1" ? true : false;
+    public string DigitalSignalOneStr => _digitalSignalOne;
+    public string DigitalSignalTwoStr => _digitalSignalTwo;
+    public string DigitalSignalThreeStr => _digitalSignalThree;
+        public bool IsConnected => isConnected;
 
     public bool IsOpen
     {
@@ -29,8 +32,10 @@ public class PortConnectController : BaseSingletonWithMono<PortConnectController
     private bool isConnected;               // 是否已连接单片机
     private bool isInitiativeDisConnect;    // 是否主动断开连接
     private string _stashConnectPortName;   // 所连接的串口名字
-    private string _analogSignal;           // 串口输出模拟信号
-    private string _digitalSignal;          // 串口输出数字信号
+    
+    private string _digitalSignalOne;       // 串口输出数字信号1
+    private string _digitalSignalTwo;       // 串口输出数字信号2
+    private string _digitalSignalThree;     // 串口输出数字信号3
     
     private SerialPort _port;               // 当前连接串口
     private Thread _messageHandleThread;    // 处理串口消息线程
@@ -145,9 +150,9 @@ public class PortConnectController : BaseSingletonWithMono<PortConnectController
                 try
                 {
                     string[] message = _port.ReadLine().Split(',');
-                    _digitalSignal = message[0];
-                    _analogSignal = message[1];
-                    Debug.Log($"数字信号为：{_digitalSignal}");
+                    _digitalSignalOne = message[0];
+                    _digitalSignalTwo = message[1];
+                    _digitalSignalThree = message[2];
                 }
                 catch (Exception e)
                 {
