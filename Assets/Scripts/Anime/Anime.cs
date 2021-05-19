@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(TTR))]
+[RequireComponent(typeof(TTR), typeof(AnimationControllerManeger))]
 public class Anime : MonoBehaviour
 {
     //接受消息
