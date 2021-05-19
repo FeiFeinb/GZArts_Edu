@@ -27,7 +27,7 @@ public class ImageController : MonoBehaviour
 
         PlayDelay();
 
-        if (PortConnectController.Instance.DigitalSignalThree)
+        if (PortConnectController.Instance.TotalSignal)
         {
             animator.SetBool("Start", true);
             animator.SetFloat("PlaySpeed", forwardSpeed);
@@ -37,14 +37,14 @@ public class ImageController : MonoBehaviour
             animator.SetFloat("PlaySpeed", reverseSpeed);
             animator.SetBool("Start", false);
         }
-        animator.SetBool("Sit", PortConnectController.Instance.DigitalSignalThree);
+        animator.SetBool("Sit", PortConnectController.Instance.TotalSignal);
     }
 
     //播放延迟
     private void PlayDelay()
     {
         stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if(stateInfo.IsName("待机动画") && WhetherDelay && PortConnectController.Instance.DigitalSignalThree)
+        if(stateInfo.IsName("待机动画") && WhetherDelay && PortConnectController.Instance.TotalSignal)
         {
             t += Time.deltaTime;
             if(t >= Delaytime)
@@ -53,7 +53,7 @@ public class ImageController : MonoBehaviour
                 WhetherDelay = false;
             }
         }
-        else if(!PortConnectController.Instance.DigitalSignal)
+        else if(!PortConnectController.Instance.TotalSignal)
         {
             WhetherDelay = false;
         }
