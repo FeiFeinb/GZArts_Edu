@@ -767,5 +767,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: ReconnectPortView
       objectReference: {fileID: 0}
+    - target: {fileID: 5548532646292774319, guid: 0c8ee153dc5ce6a4fb982f3076bf75a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c8ee153dc5ce6a4fb982f3076bf75a9, type: 3}
