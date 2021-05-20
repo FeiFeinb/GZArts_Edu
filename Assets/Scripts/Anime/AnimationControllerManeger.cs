@@ -7,9 +7,8 @@ using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class AnimationControllerManeger : MonoBehaviour
-{
-    [FormerlySerializedAs("animeController")] [SerializeField]
-    private RuntimeAnimatorController[] _animeController;
+{ 
+    [SerializeField] private RuntimeAnimatorController[] _animeController;
 
     [SerializeField] private ImageController _imageController;
     [SerializeField] private Animator _animator;
@@ -30,7 +29,6 @@ public class AnimationControllerManeger : MonoBehaviour
         _animator.runtimeAnimatorController = _animeController[playIndex[playTimes]];
         playTimes++;
         AnimeListControl();
-        _imageController.WhetherDelay = false;
     }
 
     private void AnimeListControl()

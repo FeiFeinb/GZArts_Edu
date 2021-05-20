@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerInput : BaseSingletonWithMono<PlayerInput>
@@ -8,16 +9,37 @@ public class PlayerInput : BaseSingletonWithMono<PlayerInput>
     private void Update()
     {
         // 打开串口选择界面
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // if (Input.GetKeyDown(KeyCode.Escape))
+        // {
+        //     if (PortsSelectorView.controller.isActive)
+        //     {
+        //         PortsSelectorView.controller.Hide();
+        //     }
+        //     else
+        //     {
+        //         PortsSelectorView.controller.Show();
+        //     }
+        // }
+
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            if (PortsSelectorView.controller.isActive)
+            if (MessageDebuggerView.controller.isActive)
             {
-                PortsSelectorView.controller.Hide();
+                MessageDebuggerView.controller.Hide();
             }
             else
             {
-                PortsSelectorView.controller.Show();
+                MessageDebuggerView.controller.Show();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
     }
 }

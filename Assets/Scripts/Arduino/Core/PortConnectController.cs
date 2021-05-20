@@ -12,8 +12,15 @@ using UnityEngine.PlayerLoop;
 public class PortConnectController : BaseSingletonWithMono<PortConnectController>
 {
     public string StashConnectPortName => _stashConnectPortName;
-    public bool TotalSignal => DigitalSignalOne || DigitalSignalTwo || DigitalSignalThree;
-    public bool DigitalSignalOne => _digitalSignalOne == "1" ? true : false;
+    // public bool TotalSignal => DigitalSignalOne || DigitalSignalTwo || DigitalSignalThree;
+    public bool TotalSignal
+    {
+        get
+        {
+            return Input.GetKey(KeyCode.Space);
+        }
+    }
+        public bool DigitalSignalOne => _digitalSignalOne == "1" ? true : false;
     public bool DigitalSignalTwo => _digitalSignalTwo == "1" ? true : false;
     public bool DigitalSignalThree => _digitalSignalThree == "1" ? true : false;
     public string DigitalSignalOneStr => _digitalSignalOne;
