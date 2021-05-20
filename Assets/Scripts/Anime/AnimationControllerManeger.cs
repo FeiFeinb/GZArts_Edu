@@ -24,6 +24,14 @@ public class AnimationControllerManeger : MonoBehaviour
         AnimeListControl();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+            AnimeListControl();
+        }
+    }
+
     private void ChangeAnimator()
     {
         _animator.runtimeAnimatorController = _animeController[playIndex[playTimes]];
@@ -39,16 +47,30 @@ public class AnimationControllerManeger : MonoBehaviour
         }
 
         playTimes = 0;
-        //10次循环，降低重复率
-        for (int i = 0; i < 10; i++)
-        {
-            int m = Random.Range(0, 3);
-            int n = Random.Range(0, 3);
 
-            int temp;
-            temp = playIndex[m];
-            playIndex[m] = playIndex[n];
-            playIndex[n] = temp;
+        bool succes = false;
+
+        while (!succes)
+        {
+            List<int> tempList = new List<int>(playIndex);
+
+            //10次循环，降低重复率
+            for (int i = 0; i < 10; i++)
+            {
+                int m = Random.Range(0, 3);
+                int n = Random.Range(0, 3);
+
+                int temp;
+                temp = playIndex[m];
+                playIndex[m] = playIndex[n];
+                playIndex[n] = temp;
+            }
+
+            //引入防止首尾相同，重复性增加
+            if (!tempList[2].Equals(playIndex[0]))
+            {
+                succes = true;
+            }
         }
     }
 }
