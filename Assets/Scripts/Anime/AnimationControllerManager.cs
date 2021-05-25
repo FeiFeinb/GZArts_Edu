@@ -24,7 +24,7 @@ public class AnimationControllerManager : MonoBehaviour
 
     private void AnimatorSwitch()
     {
-        _animator.runtimeAnimatorController = _animeController[playTimes % 3];
         playTimes++;
+        _animator.runtimeAnimatorController = _animeController[playTimes % 3];
     }
 }
