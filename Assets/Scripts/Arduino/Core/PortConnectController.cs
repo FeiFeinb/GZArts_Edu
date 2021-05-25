@@ -12,21 +12,20 @@ using UnityEngine.PlayerLoop;
 public class PortConnectController : BaseSingletonWithMono<PortConnectController>
 {
     public string StashConnectPortName => _stashConnectPortName;
+
     // public bool TotalSignal => DigitalSignalOne || DigitalSignalTwo || DigitalSignalThree;
     public bool TotalSignal
     {
-        get
-        {
-            return Input.GetKey(KeyCode.Space);
-        }
+        get { return Input.GetKey(KeyCode.Space); }
     }
-        public bool DigitalSignalOne => _digitalSignalOne == "1" ? true : false;
+
+    public bool DigitalSignalOne => _digitalSignalOne == "1" ? true : false;
     public bool DigitalSignalTwo => _digitalSignalTwo == "1" ? true : false;
     public bool DigitalSignalThree => _digitalSignalThree == "1" ? true : false;
     public string DigitalSignalOneStr => _digitalSignalOne;
     public string DigitalSignalTwoStr => _digitalSignalTwo;
     public string DigitalSignalThreeStr => _digitalSignalThree;
-        public bool IsConnected => isConnected;
+    public bool IsConnected => isConnected;
 
     public bool IsOpen
     {
@@ -36,20 +35,20 @@ public class PortConnectController : BaseSingletonWithMono<PortConnectController
             return _port != null && _port.IsOpen;
         }
     }
-    
-    private bool isConnected;               // 是否已连接单片机
-    private bool isInitiativeDisConnect;    // 是否主动断开连接
-    private string _stashConnectPortName;   // 所连接的串口名字
-    
-    private string _digitalSignalOne;       // 串口输出数字信号1
-    private string _digitalSignalTwo;       // 串口输出数字信号2
-    private string _digitalSignalThree;     // 串口输出数字信号3
-    
-    private SerialPort _port;               // 当前连接串口
-    private Thread _messageHandleThread;    // 处理串口消息线程
 
-    private bool _reconnectedTrigger;       // 用于子线程向主线程发送消息
-    
+    private bool isConnected; // 是否已连接单片机
+    private bool isInitiativeDisConnect; // 是否主动断开连接
+    private string _stashConnectPortName; // 所连接的串口名字
+
+    private string _digitalSignalOne; // 串口输出数字信号1
+    private string _digitalSignalTwo; // 串口输出数字信号2
+    private string _digitalSignalThree; // 串口输出数字信号3
+
+    private SerialPort _port; // 当前连接串口
+    private Thread _messageHandleThread; // 处理串口消息线程
+
+    private bool _reconnectedTrigger; // 用于子线程向主线程发送消息
+
     private void Start()
     {
         // 开启线程
@@ -75,7 +74,7 @@ public class PortConnectController : BaseSingletonWithMono<PortConnectController
         // 断开串口连接
         DisConnect();
     }
-    
+
     /// <summary>
     /// 连接串口
     /// </summary>
@@ -92,6 +91,7 @@ public class PortConnectController : BaseSingletonWithMono<PortConnectController
                 // 连接其他串口
                 DisConnect();
             }
+
             // 连接
             _port = new SerialPort(portName, 9600);
             _port.Open();
@@ -137,6 +137,7 @@ public class PortConnectController : BaseSingletonWithMono<PortConnectController
         isInitiativeDisConnect = false;
         Connect(portName);
     }
+
     /// <summary>
     /// 尝试重新连接串口
     /// </summary>

@@ -6,7 +6,6 @@ using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 public class MessageDebuggerView : BaseUIView
 {
-    public static MessageDebuggerView controller;
     
     [SerializeField] private Text _aniamtorText;
     [SerializeField] private Text _animationText;

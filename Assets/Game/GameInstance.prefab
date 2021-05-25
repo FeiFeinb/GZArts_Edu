@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1253599491540768122}
   - component: {fileID: 1253599491540768127}
   - component: {fileID: 1253599491540768126}
+  - component: {fileID: 8112368171556004820}
   m_Layer: 0
   m_Name: GameInstance
   m_TagString: Untagged
@@ -59,7 +60,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42666b41d3edcf7448da4f6549841a1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GAMETIME: 0
 --- !u!114 &1253599491540768127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,6 +72,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3630f3ad73a3a41acd7c9f41349424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  messageViewDebuggerA: {fileID: 0}
+  messageViewDebuggerB: {fileID: 0}
+  messageViewDebuggerC: {fileID: 0}
 --- !u!114 &1253599491540768126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,3 +89,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _portsSelectorView: {fileID: 0}
   _reconnectPortView: {fileID: 0}
+--- !u!114 &8112368171556004820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1253599491540768123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb889ec3beb94e0faee723a37076e552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
