@@ -40,6 +40,11 @@ public class PlayerInput : BaseSingletonWithMono<PlayerInput>
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            AnimatorReset.Instance.Reset();
+        }
+
 //         if (Input.GetKeyDown(KeyCode.Escape))
 //         {
 // #if UNITY_EDITOR

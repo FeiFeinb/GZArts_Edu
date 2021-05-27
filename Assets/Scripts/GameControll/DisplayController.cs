@@ -10,7 +10,7 @@ namespace GameControll
             for (int i = 0; i < Display.displays.Length; i++)
             {
                 Display.displays[i].Activate();
-                Screen.SetResolution(Display.displays[i].renderingWidth, Display.displays[i].renderingHeight, true);
+                Screen.SetResolution(Display.displays[i].renderingHeight * 4 / 3, Display.displays[i].renderingHeight, true);
             }
         }
     }
