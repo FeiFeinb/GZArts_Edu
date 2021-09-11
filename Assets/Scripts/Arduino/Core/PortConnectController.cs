@@ -157,8 +157,8 @@ public class PortConnectController : BaseSingletonWithMono<PortConnectController
                 {
                     string[] message = _port.ReadLine().Split(',');
                     _digitalSignalOne = message[0];
-                    _digitalSignalTwo = message[1];
-                    _digitalSignalThree = message[2];
+                    // _digitalSignalTwo = message[1];
+                    // _digitalSignalThree = message[2];
                 }
                 catch (Exception e)
                 {
